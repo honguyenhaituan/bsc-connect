@@ -158,4 +158,26 @@ export class BscController {
       throw new HttpException(e.response?.data, e.status);
     }
   }
+
+  @Get('quotes')
+  async getQuotes(@Query('symbols') symbols: string) {
+    try {
+      const data = await this.bscService.getQuotes(symbols);
+      return data;
+    } catch (e) {
+      this.logger.error(e.response?.data);
+      throw new HttpException(e.response?.data, e.status);
+    }
+  }
+
+  @Get('depth')
+  async getDepth(@Query('symbols') symbols: string) {
+    try {
+      const data = await this.bscService.getDepth(symbols);
+      return data;
+    } catch (e) {
+      this.logger.error(e.response?.data);
+      throw new HttpException(e.response?.data, e.status);
+    }
+  }
 }

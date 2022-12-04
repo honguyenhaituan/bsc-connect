@@ -185,4 +185,18 @@ export class BscService {
     );
     return data;
   }
+
+  async getQuotes(symbols: string) {
+    const { data } = await this.client.get(
+      this.config.tradingServer + `/quotes?symbols=${symbols}`,
+    );
+    return data;
+  }
+
+  async getDepth(symbols: string) {
+    const { data } = await this.client.get(
+      this.config.tradingServer + `/depth?symbols=${symbols}`,
+    );
+    return data;
+  }
 }
