@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import axios, { Axios } from 'axios';
 import * as FormData from 'form-data';
 import { AppConfig } from 'src/config';
+import { v4 as uuidv4 } from 'uuid';
 import { CreateOrderData, UpdateOrderData } from './dtos/order.dto';
 
 @Injectable()
@@ -115,7 +116,8 @@ export class BscService {
     body.append('digitalSignature', order.digitalSignature);
 
     const { data } = await this.client.post(
-      this.config.tradingServer + `/accounts/${this.data.accountId}/orders}`,
+      this.config.tradingServer +
+        `/accounts/${this.data.accountId}/orders}?requestId=${uuidv4()}`,
       body,
       { headers: body.getHeaders() },
     );
